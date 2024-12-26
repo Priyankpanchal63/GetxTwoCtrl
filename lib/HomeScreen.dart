@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getxtwoctrl/themeCtrl.dart';
 import 'counte_screen.dart';
-
-
 import 'counter_controller.dart';
 import 'item_list_controller.dart';
 import 'messageScreen.dart';
-
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -20,14 +17,23 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Home Screen'),
         actions: [
-          IconButton(
-            icon: Icon(Icons.brightness_4),
-            onPressed: () {
-              // Toggle theme
-              themeController.isDarkTheme.value = !themeController.isDarkTheme.value;
-              Get.changeThemeMode(
-                  themeController.isDarkTheme.value ? ThemeMode.dark : ThemeMode.light);
-            },
+          Row(
+            children: [
+              Text(
+                'Dark Mode',
+                style: TextStyle(fontSize: 14),
+              ),
+              Obx(
+                    () => Switch(
+                  value: themeController.isDarkTheme.value,
+                  onChanged: (value) {
+                    themeController.isDarkTheme.value = value;
+                    Get.changeThemeMode(
+                        value ? ThemeMode.dark : ThemeMode.light);
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
